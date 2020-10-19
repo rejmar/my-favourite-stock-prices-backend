@@ -33,8 +33,15 @@ public class FavouriteStocksServiceImpl implements FavouriteStocksService {
     @Override
     public FavouriteStock addStockToFavourites(Stock stock) {
         if (stock.getId() != null && stock.getPrice() != null) {
-            FavouriteStock newFavouriteStock = new FavouriteStock();
-            newFavouriteStock.setId(stock.getId());
+            Optional<FavouriteStock> foundFavouriteStock = favouriteStocksRepository.findById(stock.getId());
+            FavouriteStock newFavouriteStock;
+
+            if (foundFavouriteStock.isPresent()) {
+                newFavouriteStock = foundFavouriteStock.get();
+            } else {
+                newFavouriteStock = new FavouriteStock();
+                newFavouriteStock.setId(stock.getId());
+            }
             newFavouriteStock.setPrice(stock.getPrice());
             newFavouriteStock.setTimestamp(OffsetDateTime.now());
 
