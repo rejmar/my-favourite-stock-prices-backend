@@ -1,0 +1,191 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+tags:
+  - name: Stocks endpoints
+    description: Stocks endpoints
+  - name: Favourite stocks endpoints
+    description: Favourite stocks endpoints
+paths:
+  /v1/fav-stocks/:
+    get:
+      tags:
+        - Favourite stocks endpoints
+      summary: Fetch all favourite stocks
+      operationId: getAllFavStocks
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FavouriteStock'
+    post:
+      tags:
+        - Favourite stocks endpoints
+      summary: Add stock to favourites
+      operationId: addNewFavStock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stock'
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FavouriteStock'
+  /v1/fav-stocks/{id}:
+    delete:
+      tags:
+        - Favourite stocks endpoints
+      summary: Delete stock from favourites
+      operationId: deleteFavStock
+      parameters:
+        - name: id
+          in: path
+          description: Stock id
+          required: true
+          schema:
+            type: string
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FavouriteStock'
+  /v1/stocks/{name}:
+    get:
+      tags:
+        - Stocks endpoints
+      summary: Get stock by name
+      operationId: getStockByName
+      parameters:
+        - name: name
+          in: path
+          description: Stock's name
+          required: true
+          schema:
+            type: string
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stock'
+  /v1/stocks/:
+    get:
+      tags:
+        - Stocks endpoints
+      summary: Fetch all available stocks
+      operationId: getAllStocks
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Stock'
+components:
+  schemas:
+    Stock:
+      required:
+        - id
+        - name
+        - price
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+      description: Stock to add to favourites
+    FavouriteStock:
+      required:
+        - id
+        - price
+        - timestamp
+      type: object
+      properties:
+        id:
+          type: integer
+        price:
+          type: number
+        timestamp:
+          type: string
+          format: date-time
