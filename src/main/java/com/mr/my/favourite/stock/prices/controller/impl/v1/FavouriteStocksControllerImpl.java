@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class FavouriteStocksControllerImpl implements FavouriteStocksController 
     }
 
     @Override
-    public ResponseEntity<FavouriteStock> deleteFavStock(String id) {
+    public ResponseEntity<FavouriteStock> deleteFavStock(BigInteger id) {
         return ResponseEntity.ok(favouriteStocksService.deleteFavouriteStock(id));
     }
 }

@@ -35,8 +35,9 @@ class FavouriteStocksServiceTest {
 
     @Test
     public void itShouldReturnAllFavouriteStocksName() {
-        List<FavouriteStock> stocksNames = Arrays.asList(new FavouriteStock(BigInteger.ONE, BigDecimal.valueOf(1), mockedOffset),
-                new FavouriteStock(BigInteger.valueOf(2), BigDecimal.valueOf(2), mockedOffset));
+        List<FavouriteStock> stocksNames = Arrays.asList(new FavouriteStock(BigInteger.ONE, "TEST_1", BigDecimal.valueOf(1), mockedOffset),
+                new FavouriteStock(BigInteger.valueOf(2), "TEST_2", BigDecimal.valueOf(2), mockedOffset));
+
 
         Mockito.when(favouriteStocksRepository.findAll()).thenReturn(stocksNames);
         List<FavouriteStock> allFoundedStocks = favouriteStocksService.getAllFavouriteStocks();
@@ -47,7 +48,7 @@ class FavouriteStocksServiceTest {
     @Test
     public void itShouldAddNewFavouriteStock() {
         Stock inputStock = new Stock(BigInteger.ONE, "TEST", BigDecimal.valueOf(1));
-        FavouriteStock newFavouriteStock = new FavouriteStock(BigInteger.ONE, BigDecimal.valueOf(1), mockedOffset);
+        FavouriteStock newFavouriteStock = new FavouriteStock(BigInteger.ONE, "TEST", BigDecimal.valueOf(1), mockedOffset);
 
         Mockito.when(favouriteStocksRepository.save(any())).thenReturn(newFavouriteStock);
         FavouriteStock addedFavouriteStock = favouriteStocksService.addStockToFavourites(inputStock);

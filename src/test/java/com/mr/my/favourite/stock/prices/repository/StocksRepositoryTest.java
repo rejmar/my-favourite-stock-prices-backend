@@ -26,7 +26,7 @@ class StocksRepositoryTest {
 
     @Test
     public void itShouldFindAllDefaultStocks() {
-        List<String> stocksNames = Arrays.asList("APPLE", "MICROSOFT", "IG GROUP", "TESLA", "GENERAL MOTORS");
+        List<String> stocksNames = Arrays.asList("APPLE", "MICROSOFT", "IG_GROUP", "TESLA", "GENERAL_MOTORS");
 
         List<String> foundStocksNames = stocksRepository.findAll().stream().map(Stock::getName).collect(Collectors.toList());
 
@@ -47,7 +47,7 @@ class StocksRepositoryTest {
 
     @Test
     public void itShouldDeleteFirstStock() {
-        List<String> stocksNames = Arrays.asList("MICROSOFT", "IG GROUP", "TESLA", "GENERAL MOTORS");
+        List<String> stocksNames = Arrays.asList("MICROSOFT", "IG_GROUP", "TESLA", "GENERAL_MOTORS");
 
         stocksRepository.deleteById(BigInteger.ONE);
         List<String> foundStocksNames = stocksRepository.findAll().stream().map(Stock::getName).collect(Collectors.toList());

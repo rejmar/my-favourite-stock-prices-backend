@@ -80,7 +80,7 @@ paths:
           description: Stock id
           required: true
           schema:
-            type: string
+            type: integer
       responses:
         "404":
           description: Not Found
@@ -100,6 +100,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FavouriteStock'
+  /v1/stocks/:
+    get:
+      tags:
+        - Stocks endpoints
+      summary: Fetch all available stocks
+      operationId: getAllStocks
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Stock'
   /v1/stocks/{name}:
     get:
       tags:
@@ -132,33 +159,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Stock'
-  /v1/stocks/:
-    get:
-      tags:
-        - Stocks endpoints
-      summary: Fetch all available stocks
-      operationId: getAllStocks
-      responses:
-        "404":
-          description: Not Found
-          content:
-            '*/*':
-              schema:
-                type: string
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                type: string
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Stock'
 components:
   schemas:
     Stock:
@@ -178,12 +178,15 @@ components:
     FavouriteStock:
       required:
         - id
+        - name
         - price
         - timestamp
       type: object
       properties:
         id:
           type: integer
+        name:
+          type: string
         price:
           type: number
         timestamp:

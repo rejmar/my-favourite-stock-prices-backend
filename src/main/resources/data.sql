@@ -9,6 +9,7 @@ CREATE TABLE stock (
 
 CREATE TABLE favourite_stock (
     stock_id BIGINT,
+    name VARCHAR(250) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     timestamp TIMESTAMP WITH TIME ZONE NOT NULL,
     foreign key (stock_id) references stock(id)
@@ -17,6 +18,6 @@ CREATE TABLE favourite_stock (
 INSERT INTO stock (name, price) VALUES
   ('APPLE', RAND()*(1500-1)+1),
   ('MICROSOFT', RAND()*(1500-1)+1),
-  ('IG GROUP', RAND()*(1500-1)+1),
+  ('IG_GROUP', RAND()*(1500-1)+1),
   ('TESLA', RAND()*(1500-1)+1),
-  ('GENERAL MOTORS', RAND()*(1500-1)+1);
+  ('GENERAL_MOTORS', RAND()*(1500-1)+1);

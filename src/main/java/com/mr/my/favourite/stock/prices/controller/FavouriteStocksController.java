@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Tag(name = "Favourite stocks endpoints", description = "Favourite stocks endpoints")
@@ -28,6 +29,6 @@ public interface FavouriteStocksController {
     @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<FavouriteStock> deleteFavStock(
             @Parameter(name = "id", description = "Stock id", required = true)
-            @PathVariable(name = "id") String id
+            @PathVariable(name = "id") BigInteger id
     );
 }

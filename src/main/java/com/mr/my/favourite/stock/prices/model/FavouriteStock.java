@@ -1,5 +1,6 @@
 package com.mr.my.favourite.stock.prices.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,9 +23,14 @@ public class FavouriteStock {
     @Column(name = "stock_id")
     private BigInteger id;
     @NotNull
+    @Column(name = "name")
+    private String name;
+    @NotNull
     @Column(name = "price")
     private BigDecimal price;
     @NotNull
     @Column(name = "timestamp")
+    @JsonFormat
+            (shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
     private OffsetDateTime timestamp;
 }

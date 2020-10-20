@@ -34,6 +34,7 @@ class FavouriteStocksRepositoryTest {
     public void itShouldSaveNewFavouriteStock() {
         FavouriteStock newFavouriteStock = new FavouriteStock();
         newFavouriteStock.setId(BigInteger.ONE);
+        newFavouriteStock.setName("TEST");
         newFavouriteStock.setPrice(BigDecimal.valueOf(100));
         newFavouriteStock.setTimestamp(OffsetDateTime.of(LocalDate.parse("2020-01-01"), LocalTime.parse("01:00:00"), ZoneOffset.UTC));
 

@@ -41,9 +41,11 @@ public class FavouriteStocksServiceImpl implements FavouriteStocksService {
             } else {
                 newFavouriteStock = new FavouriteStock();
                 newFavouriteStock.setId(stock.getId());
+                newFavouriteStock.setName(stock.getName());
             }
             newFavouriteStock.setPrice(stock.getPrice());
             newFavouriteStock.setTimestamp(OffsetDateTime.now());
+            System.out.println(OffsetDateTime.now());
 
             favouriteStocksRepository.save(newFavouriteStock);
             log.info("Saving {} to favourites", stock.getName());
@@ -55,10 +57,9 @@ public class FavouriteStocksServiceImpl implements FavouriteStocksService {
     }
 
     @Override
-    public FavouriteStock deleteFavouriteStock(String id) {
-        BigInteger identity = BigInteger.valueOf(Long.parseLong(id));
-        if (identity.doubleValue() > 0) {
-            Optional<FavouriteStock> favouriteStock = favouriteStocksRepository.findById(identity);
+    public FavouriteStock deleteFavouriteStock(BigInteger id) {
+        if (id.doubleValue() > 0) {
+            Optional<FavouriteStock> favouriteStock = favouriteStocksRepository.findById(id);
 
             FavouriteStock foundFavouriteStock = favouriteStock.orElseThrow(
                     () -> new StockNotFoundException("Fav stock with id = " + id + " not found!"));

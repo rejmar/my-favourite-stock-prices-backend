@@ -38,7 +38,7 @@ class FavouriteStocksControllerTest {
 
     @Test
     public void itShouldCheckGetAllFavStocksEndpoint() throws Exception {
-        List<FavouriteStock> mockedOutput = Collections.singletonList(new FavouriteStock(BigInteger.ONE, BigDecimal.ONE, OffsetDateTime.now()));
+        List<FavouriteStock> mockedOutput = Collections.singletonList(new FavouriteStock(BigInteger.ONE, "TEST", BigDecimal.ONE, OffsetDateTime.now()));
         when(stocksService.getAllFavouriteStocks()).thenReturn(mockedOutput);
         mockMvc.perform(MockMvcRequestBuilders.get("/v1/fav-stocks/"))
                 .andExpect(status().isOk())
